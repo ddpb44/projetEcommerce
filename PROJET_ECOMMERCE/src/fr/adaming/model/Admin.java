@@ -15,8 +15,7 @@ public class Admin implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_admin")
-	private int id;
+	private int id_admin;
 	
 	private String mail;
 	
@@ -26,12 +25,13 @@ public class Admin implements Serializable {
 		super();
 	}
 
-	public int getId() {
-		return id;
+	
+	public int getId_admin() {
+		return id_admin;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId_admin(int id_admin) {
+		this.id_admin = id_admin;
 	}
 
 	public String getMail() {
@@ -52,7 +52,7 @@ public class Admin implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Admin [id=" + id + ", mail=" + mail + ", mdp=" + mdp + "]";
+		return "Admin [id=" + id_admin + ", mail=" + mail + ", mdp=" + mdp + "]";
 	}
 	
 	
