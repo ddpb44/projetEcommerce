@@ -14,7 +14,17 @@ public class CategorieServiceImpl implements ICategorieService{
 	
 	@EJB
 	ICategorieDao categorieDao;
+	
+	// Getters/Setters
+	public ICategorieDao getCategorieDao() {
+		return categorieDao;
+	}
 
+		public void setCategorieDao(ICategorieDao categorieDao) {
+		this.categorieDao = categorieDao;
+	}
+
+	// Méthodes
 	@Override
 	public Categorie addCategorie(Categorie cat) {
 		
@@ -23,14 +33,14 @@ public class CategorieServiceImpl implements ICategorieService{
 
 	@Override
 	public int deleteCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return categorieDao.deleteCategorie(cat);
 	}
 
 	@Override
 	public int updateCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return categorieDao.updateCategorie(cat);
 	}
 
 	@Override

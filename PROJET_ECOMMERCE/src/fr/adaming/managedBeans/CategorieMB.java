@@ -67,19 +67,24 @@ public class CategorieMB implements Serializable{
 	}
 	
 	
-//	@PostConstruct
-//	public void init(){
-//		
-//	}
+	@PostConstruct
+	public void init(){
+		
+		// Récupération du contexte
+		FacesContext context= FacesContext.getCurrentInstance();
+		
+		// Récupération de la session
+		this.session=(HttpSession) context.getExternalContext().getSession(false);
+	}
 	
 	public String ajouterCategorie() {
-		// Appel de la méthode service pour ajouter le client
+		// Appel de la méthode service pour ajouter la catégorie
 		Categorie cat_out=catService.addCategorie(cat);
 		
 		if (cat_out.getId_cat()==0) {
 			// Afficher le message d'erreur sur la page
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout de la catégorie a échoué..."));
-			return "ajouter";
+			return "ajouterCat";
 		} else {
 			// Récupérer la nouvelle liste à partir de la BD
 			List<Categorie> listeCat=catService.getAllCategorie();
@@ -90,6 +95,50 @@ public class CategorieMB implements Serializable{
 			return "accueil";
 			
 		}
+		
+	}
+	
+	public String supprimerCategorie(){
+		// Appel de la méthode service pour supprimer une catégorie
+		int verif=catService.deleteCategorie(cat);
+		
+		if (verif==0){
+			// Afficher le message d'erreur sur la page
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cette catégorie n'a pas pu être supprimée"));
+			
+			return "supprimerCat";
+		} else {
+			// Récupérer la nouvelle liste à partir de la BD
+			List<Categorie> listeCat=catService.getAllCategorie();
+			
+			// Actualiser la liste des catégories dans la session
+			session.setAttribute("categorieListe", listeCat);
+			
+			return "accueil";
+		}
+		
+	}
+	
+	
+	public String modifierCategorie() {
+		// Appel de la méthode service pour modifier une catégorie
+		int verif=catService.updateCategorie(cat);
+		
+		if(verif==0){
+			// Afficher le message d'erreur sur la page
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La modification de la catégorie sélectionnée n'a pas pu être complétée"));
+			
+			return "modifierCat";
+		} else {
+			// Récupération de la nouvelle liste à partir de la BD
+			List<Categorie> listeCat=catService.getAllCategorie();
+			
+			// Actualisation de la liste des catégories dans la session
+			session.setAttribute("categorieListe", listeCat);
+			
+			return "accueil";
+		}
+		
 		
 	}
 

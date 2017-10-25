@@ -27,14 +27,34 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public int deleteCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return 0;
+		// La requête JPQL
+		String req="DELETE FROM Categorie cat WHERE cat.id_cat=:pId";
+		
+		Query query=em.createQuery(req);
+		
+		// Passage des params
+		query.setParameter("pId", cat.getId_cat());
+		
+		int verif=query.executeUpdate();
+		
+		return verif;
 	}
 
 	@Override
 	public int updateCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return 0;
+		// La requête JPQL
+		String req="UPDATE Categorie cat SET cat.nomCategorie=:pNom, cat.description=:pDescription WHERE cat.id_cat=:pId";
+		
+		Query query=em.createQuery(req);
+		
+		// Passage des params
+		query.setParameter("pNom", cat.getNomCategorie());
+		query.setParameter("pDescription", cat.getDescription());
+		query.setParameter("pId", cat.getId_cat());
+		
+		int verif=query.executeUpdate();
+		
+		return verif;
 	}
 
 	@Override
