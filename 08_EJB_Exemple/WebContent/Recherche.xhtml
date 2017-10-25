@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Supprimer</title>
+</h:head>
+<body>
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:menuitem value="Accueil" url="Accueil.xhtml" icon="ui-icon-home" />
+			<p:submenu label="Gestion clients" icon="ui-icon-person">
+				<p:menuitem value="Ajouter" url="Ajouter.xhtml"
+					icon="ui-icon-plusthick" />
+				<p:separator />
+				<p:menuitem value="Supprimer" url="Supprimer.xhtml"
+					icon="ui-icon-closethick" />
+				<p:separator />
+				<p:menuitem value="Modifier" url="Modifier.xhtml"
+					icon="ui-icon-refresh" />
+				<p:separator />
+				<p:menuitem value="Rechercher" url="Recherche.xhtml"
+					icon="ui-icon-info" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+	<h:form>
+		<h1 style="color: red;">Formulaire de suppression</h1>
+		<h:panelGrid columns="2">
+				Id du client à trouver : <p:inputText value="#{cMB.client.id}"
+				styleClass="input" />
+		
+			<p:commandButton value="Rechercher" id="b1"
+				action="#{cMB.rechercheClient}" styleClass="btn btn-warning"  update="@all" />
+
+			<p:growl autoUpdate="true"></p:growl>
+		</h:panelGrid>
+	</h:form>
+	<h:form>
+	<h1 style="color: red; text-align: center">LES INFOS DU CLIENT</h1>
+		<p:dataTable var="cl" value="#{cMB.client}">
+			<p:column headerText="Id">
+				<h:outputText value="#{cl.id}" />
+			</p:column>
+
+			<p:column headerText="Nom">
+				<h:outputText value="#{cl.nom}" />
+			</p:column>
+
+			<p:column headerText="Prenom">
+				<h:outputText value="#{cl.prenom}" />
+			</p:column>
+
+			<p:column headerText="Date de Naissance">
+				<h:outputText value="#{cl.dateNaissance}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</body>
+</html>

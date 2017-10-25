@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Modifier</title>
+</h:head>
+<body>
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:menuitem value="Accueil" url="Accueil.xhtml" icon="ui-icon-home" />
+			<p:submenu label="Gestion clients" icon="ui-icon-person">
+				<p:menuitem value="Ajouter" url="Ajouter.xhtml"
+					icon="ui-icon-plusthick" />
+				<p:separator />
+				<p:menuitem value="Supprimer" url="Supprimer.xhtml"
+					icon="ui-icon-closethick" />
+				<p:separator />
+				<p:menuitem value="Modifier" url="Modifier.xhtml"
+					icon="ui-icon-refresh" />
+				<p:separator />
+				<p:menuitem value="Rechercher" url="Recherche.xhtml"
+					icon="ui-icon-info" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+	<h:form>
+		<h1 style="color: red;">Formulaire de modification client</h1>
+		<h:panelGrid columns="2">
+				Id du client à modifier : <p:inputText value="#{cMB.client.id}"
+				styleClass="input" />
+		
+				Nouveau nom : <p:inputText value="#{cMB.client.nom}"
+				styleClass="input" />
+			
+				Nouveau prenom :<p:inputText value="#{cMB.client.prenom}"
+				styleClass="input" />
+				
+				Nouvelle date de Naissance :<p:calendar id="dnId"
+				value="#{cMB.client.dateNaissance}" mode="inline" />
+			<p:commandButton value="Modifier" id="b1"
+				action="#{cMB.modifierClient}" styleClass="btn btn-warning" />
+
+			<p:growl autoUpdate="true"></p:growl>
+		</h:panelGrid>
+	</h:form>
+</body>
+</html>
