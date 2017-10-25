@@ -83,5 +83,5 @@ public class AgentManagedBean implements Serializable {
 		return "Login";
 	}
 
-	// Un commentaaire pour tester
+	// Un commentaire pour tester
 }
