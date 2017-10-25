@@ -1,6 +1,7 @@
 package fr.adaming.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -23,7 +26,8 @@ public class Commande implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id_commande;
 	
-	private Long date_naissance;
+	@Temporal(TemporalType.DATE)
+	private Date date_commande;
 	
 	// Association UML --> JAVA
 	@OneToMany(mappedBy="attCommande", fetch=FetchType.EAGER)
@@ -48,13 +52,12 @@ public class Commande implements Serializable{
 		this.id_commande = id_commande;
 	}
 
-
-	public Long getDate_naissance() {
-		return date_naissance;
+	public Date getDate_commande() {
+		return date_commande;
 	}
 
-	public void setDate_naissance(Long date_naissance) {
-		this.date_naissance = date_naissance;
+	public void setDate_commande(Date date_commande) {
+		this.date_commande = date_commande;
 	}
 
 	public List<LigneCommande> getLigneCom() {
@@ -76,9 +79,12 @@ public class Commande implements Serializable{
 	// Méthode toString()
 	@Override
 	public String toString() {
-		return "Commande [id_commande=" + id_commande + ", date_naissance=" + date_naissance + ", ligneCom=" + ligneCom
+		return "Commande [id_commande=" + id_commande + ", date_commande=" + date_commande + ", ligneCom=" + ligneCom
 				+ ", attClient=" + attClient + "]";
 	}
+
+	
+	
 
 	
 	
