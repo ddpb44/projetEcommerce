@@ -25,5 +25,71 @@
 			<p:menuitem value="Se déconnecter" url="#" />
 		</p:menubar>
 	</h:form>
+	<h1>LISTE DES CATEGORIES</h1>
+	<h:form>
+		<p:dataTable id="tableCat" var="cat" value="#{sessionScope.catListe}"
+			widgetVar="catTable" multiViewState="true" rows="5" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15"
+			emptyMessage="Pas de catégories trouvés avec vos critères"
+			style="width:90%; margin-left:5%">
+
+			<p:column headerText="Id" filterBy="#{cat.id_cat}"
+				sortBy="#{cat.id_cat}" filterMatchMode="startsWith">
+				<h:outputText value="#{cat.id_cat}" />
+			</p:column>
+
+			<p:column headerText="Nom" filterBy="#{cat.nomCategorie}"
+				sortBy="#{cat.nomCategorie}" filterMatchMode="startsWith">
+				<h:outputText value="#{cat.nomCategorie}" />
+			</p:column>
+
+			<p:column headerText="Description" filterBy="#{cat.description}"
+				sortBy="#{cat.description}" filterMatchMode="startsWith">
+				<h:outputText value="#{cat.description}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<h1>LISTE DES PRODUITS</h1>
+	<h:form>
+		<p:dataTable id="tableProd" var="prod" value="#{sessionScope.prodListe}"
+			widgetVar="prodTable" multiViewState="true" rows="5" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15"
+			emptyMessage="Pas de catégories trouvés avec vos critères"
+			style="width:90%; margin-left:5%">
+
+			<p:column headerText="Id" filterBy="#{prod.id_produit}"
+				sortBy="#{prod.id_produit}" filterMatchMode="startsWith">
+				<h:outputText value="#{prod.id_produit}" />
+			</p:column>
+
+			<p:column headerText="Designation" filterBy="#{prod.designation}"
+				sortBy="#{prod.designation}" filterMatchMode="startsWith">
+				<h:outputText value="#{prod.designation}" />
+			</p:column>
+
+			<p:column headerText="Description" filterBy="#{prod.description}"
+				sortBy="#{prod.description}" filterMatchMode="startsWith">
+				<h:outputText value="#{prod.description}" />
+			</p:column>
+			
+			<p:column headerText="Prix" filterBy="#{prod.prix}"
+				sortBy="#{prod.prix}" filterMatchMode="startsWith">
+				<h:outputText value="#{prod.prix}" />
+			</p:column>
+			
+			<p:column headerText="Quantité" filterBy="#{prod.quantite}"
+				sortBy="#{prod.quantite}" filterMatchMode="startsWith">
+				<h:outputText value="#{prod.quantite}" />
+			</p:column>
+			
+			<p:column headerText="Catégorie" filterBy="#{prod.categorie}"
+				sortBy="#{prod.categorie}" filterMatchMode="startsWith">
+				<h:outputText value="#{prod.categorie}" />
+			</p:column>
+			
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>

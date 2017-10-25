@@ -9,13 +9,15 @@
 <title>Page Accueil</title>
 </head>
 <h:body>
-<h:form>
-<h:panelGrid columns="2">
-Mail: <h:inputText value="#{aMB.admin.mail}"/>
-MDP: <h:inputText value="#{aMB.admin.mdp}"/>
-<h:commandButton value="Se connecter" action="#{aMB.seconnecter}"/>
+	<h:form>
+		<h:panelGrid columns="2">
+Mail: <h:inputText value="#{aMB.admin.mail}" required="true" />
+MDP: <h:inputText value="#{aMB.admin.mdp}" />
+			<h:commandButton value="Se connecter" action="#{aMB.seconnecter}" />
+			<p:growl id="messages" autoUpdate="true"></p:growl>
+		</h:panelGrid>
 
-</h:panelGrid>
-</h:form>
+	</h:form>
+
 </h:body>
 </html>

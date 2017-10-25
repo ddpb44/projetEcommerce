@@ -23,7 +23,6 @@ public class AdminServiceImpl implements IAdminService {
 
 	@Override
 	public Admin isexist(Admin a) throws Exception {
-		// TODO Auto-generated method stub
 		return aDao.isexist(a);
 	}
 

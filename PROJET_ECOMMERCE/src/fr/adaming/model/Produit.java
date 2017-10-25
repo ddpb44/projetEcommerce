@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="produits")
@@ -29,7 +30,7 @@ public class Produit implements Serializable {
 	
 	private double prix;
 	
-	private int quantité;
+	private int quantite;
 	
 	private boolean selectionne;
 	
@@ -79,12 +80,12 @@ public class Produit implements Serializable {
 		this.prix = prix;
 	}
 
-	public int getQuantité() {
-		return quantité;
+	public int getQuantite() {
+		return quantite;
 	}
 
-	public void setQuantité(int quantité) {
-		this.quantité = quantité;
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
 	}
 
 	public boolean isSelectionne() {
@@ -114,7 +115,7 @@ public class Produit implements Serializable {
 	@Override
 	public String toString() {
 		return "Produit [id_produit=" + id_produit + ", designation=" + designation + ", description=" + description
-				+ ", prix=" + prix + ", quantité=" + quantité + ", selectionne=" + selectionne + ", cat=" + cat
+				+ ", prix=" + prix + ", quantité=" + quantite + ", selectionne=" + selectionne + ", cat=" + cat
 				+ ", listeLCommandes=" + listeLCommandes + "]";
 	}
 	
