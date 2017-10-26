@@ -84,9 +84,9 @@
 				<h:outputText value="#{prod.quantite}" />
 			</p:column>
 			
-			<p:column headerText="Catégorie" filterBy="#{prod.cat}"
-				sortBy="#{prod.cat}" filterMatchMode="startsWith">
-				<h:outputText value="#{prod.cat}" />
+			<p:column headerText="Catégorie" filterBy="#{prod.cat.nomCategorie}"
+				sortBy="#{prod.cat.nomCategorie}" filterMatchMode="startsWith">
+				<h:outputText value="#{prod.cat.nomCategorie}" />
 			</p:column>
 			
 		</p:dataTable>
