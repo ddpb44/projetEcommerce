@@ -11,13 +11,15 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.model.SelectableDataModel;
+
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.service.ICategorieService;
 
 @ManagedBean
 @RequestScoped
-public class CategorieMB implements Serializable {
+public class CategorieMB implements Serializable{//, SelectableDataModel<Categorie> {
 
 	// Association UML --> JAVA
 
@@ -25,6 +27,9 @@ public class CategorieMB implements Serializable {
 	private ICategorieService catService;
 	private Admin admin;
 	private Categorie cat;
+	
+	// catégorie pour suppression
+	private Categorie selectedCat;
 
 	HttpSession session;
 
@@ -56,6 +61,14 @@ public class CategorieMB implements Serializable {
 
 	public void setCat(Categorie cat) {
 		this.cat = cat;
+	}
+
+	public Categorie getSelectedCat() {
+		return selectedCat;
+	}
+
+	public void setSelectedCat(Categorie selectedCat) {
+		this.selectedCat = selectedCat;
 	}
 
 	@PostConstruct
@@ -111,6 +124,23 @@ public class CategorieMB implements Serializable {
 			return "admin";
 		}
 
+	}
+	
+	// Méthode suppression directe
+	
+	public void deleteCategorie() {
+		// Appel de la méthode service pour supprimer
+		catService.deleteCategorie(selectedCat);
+		
+		// Récupération de la liste à partir de la BD
+		List<Categorie> listeCat=catService.getAllCategorie();
+		
+		// Actualisation de la liste de catégories dans la session
+		session.setAttribute("catListe", listeCat);
+		
+		// Remise à zéro du sélecteur
+		selectedCat=null;
+		
 	}
 
 	public String modifierCategorie() {
