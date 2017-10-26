@@ -30,8 +30,7 @@ public class ProduitServiceImpl implements IProduitService{
 
 	@Override
 	public Produit addProduit(Produit p) {
-		// TODO Auto-generated method stub
-		return null;
+		return prodDao.addProduit(p);
 	}
 
 	@Override

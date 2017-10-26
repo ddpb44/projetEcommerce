@@ -30,8 +30,9 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public Produit addProduit(Produit p) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(p);
+		
+		return p;
 	}
 
 	@Override

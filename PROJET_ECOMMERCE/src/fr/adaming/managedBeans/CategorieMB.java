@@ -30,7 +30,7 @@ public class CategorieMB implements Serializable{//, SelectableDataModel<Categor
 	
 	// catégorie pour suppression
 	private Categorie selectedCat;
-
+	
 	HttpSession session;
 
 	// Constructeur vide
@@ -71,6 +71,7 @@ public class CategorieMB implements Serializable{//, SelectableDataModel<Categor
 		this.selectedCat = selectedCat;
 	}
 
+	
 	@PostConstruct
 	public void init() {
 
@@ -79,6 +80,7 @@ public class CategorieMB implements Serializable{//, SelectableDataModel<Categor
 
 		// Récupération de la session
 		this.session = (HttpSession) context.getExternalContext().getSession(false);
+		
 	}
 
 	public String ajouterCategorie() {

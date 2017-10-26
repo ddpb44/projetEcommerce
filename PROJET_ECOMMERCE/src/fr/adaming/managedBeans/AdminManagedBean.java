@@ -1,5 +1,6 @@
 package fr.adaming.managedBeans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -19,7 +20,7 @@ import sun.print.PSStreamPrintService;
 
 @ManagedBean(name = "aMB")
 @RequestScoped
-public class AdminManagedBean {
+public class AdminManagedBean implements Serializable{
 
 	// Transformation de l'association UML en JAVA et l'injection de service
 	@EJB
@@ -33,6 +34,7 @@ public class AdminManagedBean {
 
 	private Admin admin;
 
+		
 	// Constructeurs
 	public AdminManagedBean() {
 		this.admin = new Admin();
@@ -74,8 +76,14 @@ public class AdminManagedBean {
 			List<Categorie> listeCat =cService.getAllCategorie();
 			List<Produit> listeProd = pService.getAllProduits();
 			
+			List<String> listeNCat = null;
+			for(Categorie c:listeCat){
+				listeNCat.add(c.getNomCategorie());
+			}
+			System.out.println(listeNCat);
 			//Ajouter la liste des categories et produits dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe", listeCat);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("nCatListe", listeNCat);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prodListe", listeProd);
 
 			// Ajouter l'admin dans la session
