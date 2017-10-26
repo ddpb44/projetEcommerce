@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page Accueil</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:menubar>
+			<p:submenu label="Gestion Categories" icon="ui-icon-contact">
+				<p:menuitem value="Ajouter" url="ajouterCat.xhtml" />
+				<p:menuitem value="Supprimer" url="supprimerCat.xhtml" />
+				<p:menuitem value="Modifier" url="modifierCat.xhtml" />
+			</p:submenu>
+
+			<p:submenu label="Gestion Produits" icon="ui-icon-pencil">
+				<p:menuitem value="Ajouter" url="ajouterProd.xhtml" />
+				<p:menuitem value="Supprimer" url="supprimerProd.xhtml" />
+				<p:menuitem value="Modifier" url="modifierProd.xhtml" />
+			</p:submenu>
+			<p:menuitem value="Se déconnecter" url="#" />
+		</p:menubar>
+	</h:form>
+
+
+	<h:form>
+		<h1 style="color: red;">Formulaire d'ajout de catégorie</h1>
+		<h:panelGrid columns="2">
+				Nom : <p:inputText value="#{categorieMB.cat.nomCategorie}"
+				styleClass="input" />
+			
+				Description :<p:inputText value="#{categorieMB.cat.description}"
+				styleClass="input" />
+
+			<p:commandButton value="Ajouter" id="b1"
+				action="#{categorieMB.ajouterCategorie()}"
+				styleClass="btn btn-warning" />
+
+			<p:growl autoUpdate="true"></p:growl>
+		</h:panelGrid>
+	</h:form>
+
+	</h:body>
+</html>

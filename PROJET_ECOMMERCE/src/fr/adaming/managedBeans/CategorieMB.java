@@ -17,129 +17,122 @@ import fr.adaming.service.ICategorieService;
 
 @ManagedBean
 @RequestScoped
-public class CategorieMB implements Serializable{
-	
+public class CategorieMB implements Serializable {
+
 	// Association UML --> JAVA
-	
+
 	@EJB
 	private ICategorieService catService;
 	private Admin admin;
 	private Categorie cat;
-	
-	
-	HttpSession session;
 
+	HttpSession session;
 
 	// Constructeur vide
 	public CategorieMB() {
 		this.cat = new Categorie();
 	}
 
-
 	// Getters/Setters
 	public ICategorieService getCatService() {
 		return catService;
 	}
 
-
 	public void setCatService(ICategorieService catService) {
 		this.catService = catService;
 	}
-
 
 	public Admin getAdmin() {
 		return admin;
 	}
 
-
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
-
 
 	public Categorie getCat() {
 		return cat;
 	}
 
-
 	public void setCat(Categorie cat) {
 		this.cat = cat;
 	}
-	
-	
+
 	@PostConstruct
-	public void init(){
-		
+	public void init() {
+
 		// Récupération du contexte
-		FacesContext context= FacesContext.getCurrentInstance();
-		
+		FacesContext context = FacesContext.getCurrentInstance();
+
 		// Récupération de la session
-		this.session=(HttpSession) context.getExternalContext().getSession(false);
+		this.session = (HttpSession) context.getExternalContext().getSession(false);
 	}
-	
+
 	public String ajouterCategorie() {
 		// Appel de la méthode service pour ajouter la catégorie
-		Categorie cat_out=catService.addCategorie(cat);
-		
-		if (cat_out.getId_cat()==0) {
+		Categorie cat_out = catService.addCategorie(cat);
+
+		if (cat_out.getId_cat() != 0) {
+
+			// Récupérer la nouvelle liste à partir de la BD
+			List<Categorie> listeCat = catService.getAllCategorie();
+
+			// Actualiser la liste des catégories dans la session
+			session.setAttribute("catListe", listeCat);
+
+			return "admin";
+
+		} else {
 			// Afficher le message d'erreur sur la page
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout de la catégorie a échoué..."));
 			return "ajouterCat";
-		} else {
-			// Récupérer la nouvelle liste à partir de la BD
-			List<Categorie> listeCat=catService.getAllCategorie();
-			
-			// Actualiser la liste des catégories dans la session
-			session.setAttribute("categorieListe", listeCat);
-			
-			return "accueil";
-			
+
 		}
-		
+
 	}
-	
-	public String supprimerCategorie(){
+
+	public String supprimerCategorie() {
 		// Appel de la méthode service pour supprimer une catégorie
-		int verif=catService.deleteCategorie(cat);
-		
-		if (verif==0){
+		int verif = catService.deleteCategorie(cat);
+
+		if (verif == 0) {
 			// Afficher le message d'erreur sur la page
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cette catégorie n'a pas pu être supprimée"));
-			
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Cette catégorie n'a pas pu être supprimée"));
+
 			return "supprimerCat";
 		} else {
 			// Récupérer la nouvelle liste à partir de la BD
-			List<Categorie> listeCat=catService.getAllCategorie();
-			
+			List<Categorie> listeCat = catService.getAllCategorie();
+
 			// Actualiser la liste des catégories dans la session
-			session.setAttribute("categorieListe", listeCat);
-			
-			return "accueil";
+			session.setAttribute("catListe", listeCat);
+
+			return "admin";
 		}
-		
+
 	}
-	
-	
+
 	public String modifierCategorie() {
 		// Appel de la méthode service pour modifier une catégorie
-		int verif=catService.updateCategorie(cat);
-		
-		if(verif==0){
+		int verif = catService.updateCategorie(cat);
+
+		if (verif == 0) {
 			// Afficher le message d'erreur sur la page
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La modification de la catégorie sélectionnée n'a pas pu être complétée"));
-			
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("La modification de la catégorie sélectionnée n'a pas pu être complétée"));
+
 			return "modifierCat";
 		} else {
 			// Récupération de la nouvelle liste à partir de la BD
-			List<Categorie> listeCat=catService.getAllCategorie();
-			
+			List<Categorie> listeCat = catService.getAllCategorie();
+
 			// Actualisation de la liste des catégories dans la session
-			session.setAttribute("categorieListe", listeCat);
-			
-			return "accueil";
+			session.setAttribute("catListe", listeCat);
+
+			return "admin";
 		}
-		
-		
+
 	}
 
 }
