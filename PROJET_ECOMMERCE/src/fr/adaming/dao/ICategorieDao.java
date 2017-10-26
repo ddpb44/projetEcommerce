@@ -17,5 +17,9 @@ public interface ICategorieDao {
 	public int updateCategorie (Categorie cat);
 	
 	public List<Categorie> getAllCategorie ();
+	
+	public Categorie getCatByName (String name);
+	
+	public List<String> getAllCatNames();
 
 }

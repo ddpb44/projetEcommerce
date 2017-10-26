@@ -71,4 +71,33 @@ public class CategorieDaoImpl implements ICategorieDao {
 		return catListe;
 	}
 
+	@Override
+	public Categorie getCatByName(String name) {
+		// La requête JPQL
+		String req="SELECT cat FROM Categorie cat WHERE cat.nomCategorie=:pNom";
+		
+		Query query = em.createQuery(req);
+		
+		// Passage du param
+		query.setParameter("pNom", name);
+		
+		// Récupération de la catégorie
+		Categorie cat=(Categorie) query.getSingleResult();
+		
+		return cat;
+	}
+
+	@Override
+	public List<String> getAllCatNames() {
+		// La requête SQL
+		String req="SELECT nomCategorie FROM categories";
+		
+		Query query=em.createNativeQuery(req, Categorie.class);
+		
+		// Récupération de la liste de noms
+		List<String> listeNoms=query.getResultList();
+		
+		return listeNoms;
+	}
+
 }
