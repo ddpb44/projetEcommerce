@@ -32,6 +32,7 @@ public class Produit implements Serializable {
 	
 	private int quantite;
 	
+	@Transient
 	private boolean selectionne;
 	
 	//Association UML en JAVA
