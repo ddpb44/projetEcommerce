@@ -3,6 +3,7 @@ package fr.adaming.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Categorie implements Serializable{
 	private String description;
 	
 	//Association UML en JAVA
-	@OneToMany(mappedBy="cat", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="cat", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	private List<Produit> listeProduits;
 
 	//Constructeur

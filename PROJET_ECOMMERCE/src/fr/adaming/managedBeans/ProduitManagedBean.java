@@ -22,12 +22,13 @@ public class ProduitManagedBean {
 
 	@EJB
 	private IProduitService prodService;
-	
+
 	@EJB
 	private ICategorieService catService;
-	
+
 	private Admin admin;
 	private Produit prod;
+	private Produit selectedProd;
 	private List<Categorie> listecat;
 	private String nomCat;
 
@@ -70,13 +71,28 @@ public class ProduitManagedBean {
 		this.listecat = listecat;
 	}
 
-	
 	public String getNomCat() {
 		return nomCat;
 	}
 
 	public void setNomCat(String nomCat) {
 		this.nomCat = nomCat;
+	}
+
+	public ICategorieService getCatService() {
+		return catService;
+	}
+
+	public void setCatService(ICategorieService catService) {
+		this.catService = catService;
+	}
+
+	public Produit getSelectedProd() {
+		return selectedProd;
+	}
+
+	public void setSelectedProd(Produit selectedProd) {
+		this.selectedProd = selectedProd;
 	}
 
 	// Methodes metiers
@@ -113,4 +129,34 @@ public class ProduitManagedBean {
 
 	}
 
+	public String supprimerProduit() {
+		// Appel de la méthode service pour supprimer une catégorie
+		int verif = prodService.deleteProduit(this.prod);
+
+		if (verif == 0) {
+			// Afficher le message d'erreur sur la page
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Ce produit n'a pas pu être supprimée"));
+
+			return "supprimerProd";
+			
+		} else {
+			// Récupérer la nouvelle liste à partir de la BD
+			List<Produit> listeProd = prodService.getAllProduits();
+
+			// Actualiser la liste des catégories dans la session
+			session.setAttribute("prodListe", listeProd);
+
+			return "admin";
+		}
+
+	}
+	
+	public void deleteProduit() {
+		prodService.deleteProduit(selectedProd);
+		List<Produit> listeProd = prodService.getAllProduits();
+		session.setAttribute("prodListe", listeProd);
+		selectedProd = null;
+	}
+	
 }

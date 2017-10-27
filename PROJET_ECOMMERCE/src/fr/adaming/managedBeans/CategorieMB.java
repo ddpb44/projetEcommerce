@@ -15,22 +15,30 @@ import org.primefaces.model.SelectableDataModel;
 
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean
 @RequestScoped
-public class CategorieMB implements Serializable{//, SelectableDataModel<Categorie> {
+public class CategorieMB implements Serializable {// ,
+													// SelectableDataModel<Categorie>
+													// {
 
 	// Association UML --> JAVA
 
 	@EJB
 	private ICategorieService catService;
+
+	@EJB
+	private IProduitService prodService;
+
 	private Admin admin;
 	private Categorie cat;
-	
+
 	// catégorie pour suppression
 	private Categorie selectedCat;
-	
+
 	HttpSession session;
 
 	// Constructeur vide
@@ -71,7 +79,6 @@ public class CategorieMB implements Serializable{//, SelectableDataModel<Categor
 		this.selectedCat = selectedCat;
 	}
 
-	
 	@PostConstruct
 	public void init() {
 
@@ -80,7 +87,7 @@ public class CategorieMB implements Serializable{//, SelectableDataModel<Categor
 
 		// Récupération de la session
 		this.session = (HttpSession) context.getExternalContext().getSession(false);
-		
+
 	}
 
 	public String ajouterCategorie() {
@@ -91,9 +98,11 @@ public class CategorieMB implements Serializable{//, SelectableDataModel<Categor
 
 			// Récupérer la nouvelle liste à partir de la BD
 			List<Categorie> listeCat = catService.getAllCategorie();
-
+			List<String> listNCat = catService.getAllCatNames();
+			
 			// Actualiser la liste des catégories dans la session
 			session.setAttribute("catListe", listeCat);
+			session.setAttribute("nCatListe", listNCat);
 
 			return "admin";
 
@@ -106,44 +115,26 @@ public class CategorieMB implements Serializable{//, SelectableDataModel<Categor
 
 	}
 
-	public String supprimerCategorie() {
-		// Appel de la méthode service pour supprimer une catégorie
-		int verif = catService.deleteCategorie(cat);
-
-		if (verif == 0) {
-			// Afficher le message d'erreur sur la page
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Cette catégorie n'a pas pu être supprimée"));
-
-			return "supprimerCat";
-		} else {
-			// Récupérer la nouvelle liste à partir de la BD
-			List<Categorie> listeCat = catService.getAllCategorie();
-
-			// Actualiser la liste des catégories dans la session
-			session.setAttribute("catListe", listeCat);
-
-			return "admin";
-		}
-
-	}
 	
 	// Méthode suppression directe
-	
+
 	public void deleteCategorie() {
 		// Appel de la méthode service pour supprimer
 		catService.deleteCategorie(selectedCat);
-		
-		// Récupération de la liste à partir de la BD
-		List<Categorie> listeCat=catService.getAllCategorie();
-		
-		// Actualisation de la liste de catégories dans la session
+
+		// Récupérer la nouvelle liste à partir de la BD
+		List<Categorie> listeCat = catService.getAllCategorie();
+		List<Produit> listeProd = prodService.getAllProduits();
+
+		// Actualiser la liste des catégories dans la session
 		session.setAttribute("catListe", listeCat);
-		
+		session.setAttribute("prodListe", listeProd);
+
 		// Remise à zéro du sélecteur
-		selectedCat=null;
-		
+		selectedCat = null;
+
 	}
+
 
 	public String modifierCategorie() {
 		// Appel de la méthode service pour modifier une catégorie

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Local
@@ -16,8 +17,6 @@ public interface IProduitDao {
 	public int updateProduit(Produit p);
 	
 	public int deleteProduit(Produit p);
-	
-	public Produit getProduitById(Produit p);
 	
 
 }

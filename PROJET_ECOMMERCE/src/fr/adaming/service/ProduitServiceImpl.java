@@ -7,6 +7,7 @@ import javax.ejb.Stateful;
 
 import fr.adaming.dao.ICategorieDao;
 import fr.adaming.dao.IProduitDao;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Stateful
@@ -41,14 +42,8 @@ public class ProduitServiceImpl implements IProduitService{
 
 	@Override
 	public int deleteProduit(Produit p) {
-		// TODO Auto-generated method stub
-		return 0;
+		return prodDao.deleteProduit(p);
 	}
 
-	@Override
-	public Produit getProduitById(Produit p) {
-		// TODO Auto-generated method stub
-		return null;
+	
 	}
-
-}

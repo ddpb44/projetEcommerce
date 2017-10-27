@@ -19,7 +19,8 @@
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15"
 			emptyMessage="Pas de catégories trouvés avec vos critères"
-			style="width:90%; margin-left:5%">
+			style="width:90%; margin-left:5%" rowKey="#{cat.id_cat}"
+			selection="#{categorieMB.selectedCat}" selectionMode="single">
 
 			<p:column headerText="Id" filterBy="#{cat.id_cat}"
 				sortBy="#{cat.id_cat}" filterMatchMode="startsWith">
@@ -36,7 +37,10 @@
 				<h:outputText value="#{cat.description}" />
 			</p:column>
 		</p:dataTable>
-
+		<p:contextMenu for="tableCat">
+			<p:menuitem value="Supprimer" update="@all" icon="ui-icon-close"
+				action="#{categorieMB.deleteCategorie}" />
+		</p:contextMenu>
 
 	</h:form>
 	<h1>LISTE DES PRODUITS</h1>
@@ -47,7 +51,8 @@
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15"
 			emptyMessage="Pas de catégories trouvés avec vos critères"
-			style="width:90%; margin-left:5%">
+			style="width:90%; margin-left:5%" rowKey="#{prod.id_produit}"
+			selection="#{pMB.selectedProd}" selectionMode="single">
 
 			<p:column headerText="Id" filterBy="#{prod.id_produit}"
 				sortBy="#{prod.id_produit}" filterMatchMode="startsWith">
@@ -80,6 +85,10 @@
 			</p:column>
 
 		</p:dataTable>
+		<p:contextMenu for="tableProd">
+			<p:menuitem value="Supprimer" update="tableProd" icon="ui-icon-close"
+				action="#{pMB.deleteProduit}" />
+		</p:contextMenu>
 	</h:form>
 </h:body>
 </html>
