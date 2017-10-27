@@ -8,24 +8,9 @@
 	<title>Ajouter</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:growl id="messages" />
-		<p:menubar>
-			<p:submenu label="Gestion Categories" icon="ui-icon-contact">
-				<p:menuitem value="Ajouter" url="ajouterCat.xhtml" />
-				<p:menuitem value="Supprimer" url="supprimerCat.xhtml" />
-				<p:menuitem value="Modifier" url="modifierCat.xhtml" />
-			</p:submenu>
-
-			<p:submenu label="Gestion Produits" icon="ui-icon-pencil">
-				<p:menuitem value="Ajouter" url="ajouterProd.xhtml" />
-				<p:menuitem value="Supprimer" url="supprimerProd.xhtml" />
-				<p:menuitem value="Modifier" url="modifierProd.xhtml" />
-			</p:submenu>
-			<p:menuitem value="Se déconnecter" url="#" />
-		</p:menubar>
-	</h:form>
-
+	<ui:insert name="page">
+		<ui:include src="/Template/header.xhtml"></ui:include>
+	</ui:insert>
 	<h:form>
 		<h1 style="color: red;">Formulaire d'ajout produit</h1>
 		<h:panelGrid columns="2">

@@ -93,4 +93,11 @@ public class AdminManagedBean implements Serializable{
 		}
 
 	}
+	
+		public String sedeconnecter(){
+		
+		//Recuperer la session et la fermer
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "accueil";
+	}
 }

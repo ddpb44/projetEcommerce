@@ -9,26 +9,12 @@
 	<title>Page Accueil</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:menubar>
-		<p:menuitem value="Accueil" url="admin.xhtml" />
-			<p:submenu label="Gestion Categories" icon="ui-icon-contact">
-				<p:menuitem value="Ajouter" url="ajouterCat.xhtml" />
-				<p:menuitem value="Supprimer" url="supprimerCat.xhtml" />
-				<p:menuitem value="Modifier" url="modifierCat.xhtml" />
-			</p:submenu>
-
-			<p:submenu label="Gestion Produits" icon="ui-icon-pencil">
-				<p:menuitem value="Ajouter" url="ajouterProd.xhtml" />
-				<p:menuitem value="Supprimer" url="supprimerProd.xhtml" />
-				<p:menuitem value="Modifier" url="modifierProd.xhtml" />
-			</p:submenu>
-			<p:menuitem value="Se déconnecter" url="#" />
-		</p:menubar>
-	</h:form>
+	<ui:insert name="page">
+		<ui:include src="/Template/header.xhtml"></ui:include>
+	</ui:insert>
 	<h1>LISTE DES CATEGORIES</h1>
 	<h:form>
-		<p:dataTable id="tableCat" var="cat" value="#{sessionScope.catListe}" 
+		<p:dataTable id="tableCat" var="cat" value="#{sessionScope.catListe}"
 			widgetVar="catTable" multiViewState="true" rows="5" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15"
@@ -50,13 +36,14 @@
 				<h:outputText value="#{cat.description}" />
 			</p:column>
 		</p:dataTable>
-		
-		
+
+
 	</h:form>
 	<h1>LISTE DES PRODUITS</h1>
 	<h:form>
-		<p:dataTable id="tableProd" var="prod" value="#{sessionScope.prodListe}"
-			widgetVar="prodTable" multiViewState="true" rows="5" paginator="true"
+		<p:dataTable id="tableProd" var="prod"
+			value="#{sessionScope.prodListe}" widgetVar="prodTable"
+			multiViewState="true" rows="5" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15"
 			emptyMessage="Pas de catégories trouvés avec vos critères"
@@ -76,22 +63,22 @@
 				sortBy="#{prod.description}" filterMatchMode="startsWith">
 				<h:outputText value="#{prod.description}" />
 			</p:column>
-			
+
 			<p:column headerText="Prix" filterBy="#{prod.prix}"
 				sortBy="#{prod.prix}" filterMatchMode="startsWith">
 				<h:outputText value="#{prod.prix}" />
 			</p:column>
-			
+
 			<p:column headerText="Quantité" filterBy="#{prod.quantite}"
 				sortBy="#{prod.quantite}" filterMatchMode="startsWith">
 				<h:outputText value="#{prod.quantite}" />
 			</p:column>
-			
+
 			<p:column headerText="Catégorie" filterBy="#{prod.cat.nomCategorie}"
 				sortBy="#{prod.cat.nomCategorie}" filterMatchMode="startsWith">
 				<h:outputText value="#{prod.cat.nomCategorie}" />
 			</p:column>
-			
+
 		</p:dataTable>
 	</h:form>
 </h:body>
