@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "pMB")
@@ -21,6 +22,10 @@ public class ProduitManagedBean {
 
 	@EJB
 	private IProduitService prodService;
+	
+	@EJB
+	private ICategorieService catService;
+	
 	private Admin admin;
 	private Produit prod;
 	private List<Categorie> listecat;
@@ -87,6 +92,8 @@ public class ProduitManagedBean {
 
 	public String ajouterProduit() {
 		// Appel de la méthode service pour ajouter la catégorie
+		Categorie cat_in = catService.getCatByName(this.nomCat);
+		this.prod.setCat(cat_in);
 		Produit prod_out = prodService.addProduit(this.prod);
 
 		if (prod_out.getId_produit() == 0) {
@@ -100,7 +107,7 @@ public class ProduitManagedBean {
 			// Actualiser la liste des catégories dans la session
 			session.setAttribute("prodListe", listeProd);
 
-			return "accueil";
+			return "admin";
 
 		}
 

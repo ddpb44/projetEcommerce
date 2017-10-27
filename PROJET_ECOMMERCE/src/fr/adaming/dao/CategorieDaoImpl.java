@@ -92,7 +92,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 		// La requête SQL
 		String req="SELECT nomCategorie FROM categories";
 		
-		Query query=em.createNativeQuery(req, Categorie.class);
+		Query query=em.createNativeQuery(req);
 		
 		// Récupération de la liste de noms
 		List<String> listeNoms=query.getResultList();

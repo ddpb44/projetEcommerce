@@ -46,7 +46,7 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public Produit getClientById(Produit p) {
+	public Produit getProduitById(Produit p) {
 		// TODO Auto-generated method stub
 		return null;
 	}

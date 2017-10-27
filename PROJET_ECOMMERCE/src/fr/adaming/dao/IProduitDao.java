@@ -17,7 +17,7 @@ public interface IProduitDao {
 	
 	public int deleteProduit(Produit p);
 	
-	public Produit getClientById(Produit p);
+	public Produit getProduitById(Produit p);
 	
 
 }

@@ -11,6 +11,7 @@
 <h:body>
 	<h:form>
 		<p:menubar>
+		<p:menuitem value="Accueil" url="admin.xhtml" />
 			<p:submenu label="Gestion Categories" icon="ui-icon-contact">
 				<p:menuitem value="Ajouter" url="ajouterCat.xhtml" />
 				<p:menuitem value="Supprimer" url="supprimerCat.xhtml" />
@@ -27,7 +28,7 @@
 	</h:form>
 	<h1>LISTE DES CATEGORIES</h1>
 	<h:form>
-		<p:dataTable id="tableCat" var="cat" value="#{sessionScope.catListe}" selection="#{categorieMB.selectedCat}" selectionMode="single" rowKey="#{categorieMB.}"
+		<p:dataTable id="tableCat" var="cat" value="#{sessionScope.catListe}" 
 			widgetVar="catTable" multiViewState="true" rows="5" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15"
@@ -50,9 +51,7 @@
 			</p:column>
 		</p:dataTable>
 		
-		<p:contextMenu for="tableCat">
-			<p:menuitem value="Supprimer" update="tableCat" action="#{categorieMB.deleteCategorie}"></p:menuitem>
-		</p:contextMenu>
+		
 	</h:form>
 	<h1>LISTE DES PRODUITS</h1>
 	<h:form>

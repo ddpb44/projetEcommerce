@@ -71,19 +71,15 @@ public class AdminManagedBean implements Serializable{
 		try {
 			
 			Admin a_out = aService.isexist(this.admin);
-			System.out.println(a_out);
+		
 			//Recuperation de la liste
 			List<Categorie> listeCat =cService.getAllCategorie();
+			List<String> listNCat = cService.getAllCatNames();
 			List<Produit> listeProd = pService.getAllProduits();
-			
-			List<String> listeNCat = null;
-			for(Categorie c:listeCat){
-				listeNCat.add(c.getNomCategorie());
-			}
-			System.out.println(listeNCat);
+					
 			//Ajouter la liste des categories et produits dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe", listeCat);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("nCatListe", listeNCat);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("nCatListe", listNCat);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prodListe", listeProd);
 
 			// Ajouter l'admin dans la session

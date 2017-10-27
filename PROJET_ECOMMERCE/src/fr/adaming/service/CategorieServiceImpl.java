@@ -49,4 +49,14 @@ public class CategorieServiceImpl implements ICategorieService{
 		return categorieDao.getAllCategorie();
 	}
 
+	@Override
+	public Categorie getCatByName(String name) {
+		return categorieDao.getCatByName(name);
+	}
+
+	@Override
+	public List<String> getAllCatNames() {
+		return categorieDao.getAllCatNames();
+	}
+
 }
