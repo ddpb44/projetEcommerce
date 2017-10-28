@@ -21,7 +21,7 @@ public class LigneCommande implements Serializable {
 
 	private int quantite;
 
-	private int prix;
+	private double prix;
 
 	// Associations UML --> JAVA
 	@ManyToOne
@@ -54,11 +54,11 @@ public class LigneCommande implements Serializable {
 		this.quantite = quantite;
 	}
 
-	public int getPrix() {
+	public double getPrix() {
 		return prix;
 	}
 
-	public void setPrix(int prix) {
+	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 
