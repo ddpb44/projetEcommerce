@@ -60,6 +60,9 @@
 				<p:commandButton value="+" action="#{clMB.ajouterProduit}">
 					<f:setPropertyActionListener value="#{prod}" target="#{clMB.prod}"></f:setPropertyActionListener>
 				</p:commandButton>
+				<p:commandButton value="-" action="#{clMB.enleverProduit}">
+					<f:setPropertyActionListener value="#{prod}" target="#{clMB.prod}"></f:setPropertyActionListener>
+				</p:commandButton>
 			</p:column>
 
 		</p:dataTable>
