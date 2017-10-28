@@ -10,10 +10,23 @@
 </head>
 <h:body>
 	<h:form>
+	
+	<h3 style="color: green">Connexion administrateur</h3>
 		<h:panelGrid columns="2">
-Mail: <h:inputText value="#{aMB.admin.mail}" required="true" />
-MDP: <h:inputText value="#{aMB.admin.mdp}" />
+Mail: <p:inputText value="#{aMB.admin.mail}" required="true" />
+MDP: <p:password value="#{aMB.admin.mdp}" required="true"/>
 			<h:commandButton value="Se connecter" action="#{aMB.seconnecter}" />
+			<p:growl id="messages" autoUpdate="true"></p:growl>
+		</h:panelGrid>
+
+	</h:form>
+	
+	
+	<h:form>
+	
+	<h3 style="color: green">Accueil client</h3>
+		<h:panelGrid columns="2">
+			<h:commandButton value="Entrer" action="#{clMB.entrerSite}" />
 			<p:growl id="messages" autoUpdate="true"></p:growl>
 		</h:panelGrid>
 
