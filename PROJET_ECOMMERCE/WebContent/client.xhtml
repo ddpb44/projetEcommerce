@@ -58,7 +58,7 @@
 
 			<p:column headerText="Actions">
 				<p:commandButton value="+" action="#{clMB.ajouterProduit}">
-					<f:setPropertyActionListener value="ajout" target="#{clMB.id_prod}"></f:setPropertyActionListener>
+					<f:setPropertyActionListener value="#{prod.id_prod}" target="#{clMB.id_prod}"></f:setPropertyActionListener>
 				</p:commandButton>
 			</p:column>
 
