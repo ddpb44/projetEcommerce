@@ -39,8 +39,21 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public int updateProduit(Produit p) {
-		// TODO Auto-generated method stub
-		return 0;
+		// La requête JPQL
+		String req = "UPDATE Produit p SET p.designation=:pDesignation, p.description=:pDescription, p.prix=:pPrix, p.quantite=:pQuantite WHERE p.id_produit=:pId";
+
+		Query query = em.createQuery(req);
+
+		// Passage des params
+		query.setParameter("pDesignation", p.getDesignation());
+		query.setParameter("pDescription", p.getDescription());
+		query.setParameter("pPrix", p.getPrix());
+		query.setParameter("pQuantite", p.getQuantite());
+		query.setParameter("pId", p.getId_produit());
+
+		int verif = query.executeUpdate();
+
+		return verif;
 	}
 
 	@Override
@@ -58,5 +71,4 @@ public class ProduitDaoImpl implements IProduitDao {
 		return verif;
 	}
 
-	
-	}
+}
