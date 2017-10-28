@@ -30,6 +30,7 @@ public class ProduitManagedBean {
 	private Produit prod;
 	private Produit selectedProd;
 	private List<Categorie> listecat;
+	private List<Produit> filteredProd;
 	private String nomCat;
 
 	HttpSession session;
@@ -93,6 +94,15 @@ public class ProduitManagedBean {
 
 	public void setSelectedProd(Produit selectedProd) {
 		this.selectedProd = selectedProd;
+	}
+
+	
+	public List<Produit> getFilteredProd() {
+		return filteredProd;
+	}
+
+	public void setFilteredProd(List<Produit> filteredProd) {
+		this.filteredProd = filteredProd;
 	}
 
 	// Methodes metiers

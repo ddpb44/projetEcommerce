@@ -113,6 +113,8 @@ public class Produit implements Serializable {
 		this.listeLCommandes = listeLCommandes;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "Produit [id_produit=" + id_produit + ", designation=" + designation + ", description=" + description

@@ -10,10 +10,10 @@
 </h:head>
 <h:body>
 	<ui:insert name="page">
-		<ui:include src="/Template/header.xhtml"></ui:include>
+		<ui:include src="/Template/header2.xhtml"></ui:include>
 	</ui:insert>
 
-<h1>LISTE DES PRODUITS</h1>
+	<h1>LISTE DES PRODUITS</h1>
 	<h:form>
 		<p:dataTable id="tableProd" var="prod"
 			value="#{sessionScope.prodListe}" widgetVar="prodTable"
@@ -21,16 +21,16 @@
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15"
 			emptyMessage="Pas de catégories trouvés avec vos critères"
-			style="width:90%; margin-left:5%">
+			style="width:90%; margin-left:5%" filteredValue="#{pMB.filteredProd}">
 
 
 			<p:column headerText="Designation" filterBy="#{prod.designation}"
-				sortBy="#{prod.designation}" filterMatchMode="startsWith">
+				sortBy="#{prod.designation}" filterMatchMode="contains">
 				<h:outputText value="#{prod.designation}" />
 			</p:column>
 
 			<p:column headerText="Description" filterBy="#{prod.description}"
-				sortBy="#{prod.description}" filterMatchMode="startsWith">
+				sortBy="#{prod.description}" filterMatchMode="contains">
 				<h:outputText value="#{prod.description}" />
 			</p:column>
 
@@ -39,14 +39,27 @@
 				<h:outputText value="#{prod.prix}" />
 			</p:column>
 
-			<p:column headerText="Quantité" filterBy="#{prod.quantite}"
+			<p:column headerText="Stock" filterBy="#{prod.quantite}"
 				sortBy="#{prod.quantite}" filterMatchMode="startsWith">
 				<h:outputText value="#{prod.quantite}" />
 			</p:column>
 
-			<p:column headerText="Catégorie" filterBy="#{prod.cat.nomCategorie}"
-				sortBy="#{prod.cat.nomCategorie}" filterMatchMode="startsWith">
+			<p:column filterBy="#{prod.cat.nomCategorie}" headerText="Catégorie"
+				filterMatchMode="in">
+				<f:facet name="filter">
+					<p:selectCheckboxMenu label="Selectionner une categorie"
+						onchange="PF('prodTable').filter()" panelStyle="width:125px"
+						scrollHeight="150">
+						<f:selectItems value="#{sessionScope.nCatListe}" />
+					</p:selectCheckboxMenu>
+				</f:facet>
 				<h:outputText value="#{prod.cat.nomCategorie}" />
+			</p:column>
+
+			<p:column headerText="Actions">
+				<p:commandButton value="+" action="#{clMB.ajouterProduit}">
+					<f:setPropertyActionListener value="ajout" target="#{clMB.id_prod}"></f:setPropertyActionListener>
+				</p:commandButton>
 			</p:column>
 
 		</p:dataTable>
