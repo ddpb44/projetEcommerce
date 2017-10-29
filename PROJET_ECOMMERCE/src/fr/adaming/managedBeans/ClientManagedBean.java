@@ -50,7 +50,7 @@ public class ClientManagedBean implements Serializable {
 
 	private Panier panier;
 
-	private List<LigneCommande> listeLCom= new ArrayList<LigneCommande>();
+	private List<LigneCommande> listeLCom = new ArrayList<LigneCommande>();
 
 	// Constructeur vide
 	public ClientManagedBean() {
@@ -151,37 +151,42 @@ public class ClientManagedBean implements Serializable {
 		List<LigneCommande> listeCourses = (List<LigneCommande>) FacesContext.getCurrentInstance().getExternalContext()
 				.getSessionMap().get("panierActuel");
 
-		System.out
-				.println("\n--------------------------------------------------------------------------Liste courses avant ajout" + listeCourses);
+		System.out.println(
+				"\n--------------------------------------------------------------------------Liste courses avant ajout"
+						+ listeCourses);
 
 		// Vérifier si le produit est dans la liste de commande
 		Iterator<LigneCommande> it = listeCourses.iterator();
 
-		LigneCommande ligne=new LigneCommande();
-		
-		System.out
-		.println("\n--------------------------------------------------------------------------Nouvelle ligne commande pour itérator" + ligne);
+		LigneCommande ligne = new LigneCommande();
+
+		System.out.println(
+				"\n--------------------------------------------------------------------------Nouvelle ligne commande pour itérator"
+						+ ligne);
 
 		// Parcours de la liste à la recherche d'une correspondance entre id de
 		// produits
-		
-		if (it.hasNext()) {
-			
+
+		if (it.hasNext()) { // liste avec éléments
+
 			do {
 				ligne = it.next();
 			} while (it.hasNext() && ligne.getAttProduit().getId_produit() != prod.getId_produit());
-			
-		} else {
-			
-			while (it.hasNext() && ligne.getAttProduit().getId_produit() != prod.getId_produit()) {
-				ligne = it.next();
-			}
-			
-		}
 
-		
-		System.out.println("\n--------------------------------------------------------------------------Fin de l'itérator" + ligne);
-		if (ligne.getAttProduit()==null||ligne.getAttProduit().getId_produit() != prod.getId_produit()) {
+		}
+		// else {
+		//
+		// while (it.hasNext() && ligne.getAttProduit().getId_produit() !=
+		// prod.getId_produit()) {
+		// ligne = it.next();
+		// }
+		//
+		// }
+
+		System.out
+				.println("\n--------------------------------------------------------------------------Fin de l'itérator"
+						+ ligne);
+		if (ligne.getAttProduit() == null || ligne.getAttProduit().getId_produit() != prod.getId_produit()) {
 
 			// Pas de correspondance --> Nouveau produit
 
@@ -223,30 +228,75 @@ public class ClientManagedBean implements Serializable {
 
 			}
 		}
-		System.out.println("\n--------------------------------------------------------------------------Liste de courses après l'ajout" + listeCourses);
-
-		// // Transmettre le produit à une nouvelle ligne de commande
-		// ligneCommande.setAttProduit(prod);
-		// ligneCommande.setPrix(prod.getPrix());
-		// ligneCommande.setQuantite(ligneCommande.getQuantite() + 1);
-		// System.out.println(
-		// "\n--------------------------------------------------------------------------"
-		// + ligneCommande);
-		// System.out.println("\n--------------------------------------------------------------------------"
-		// + panier);
-
-		// Ajouter la ligne de commande au panier
-
-		// liste.add(ligneCommande);
-		// panierCourses.setListeLCommandes(liste);
-		//
-		// // Ajouter la liste du panier dans la session
-		// FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("panierActuel",
-		// panierCourses);
-		//
-		// System.out.println(panierCourses.getListeLCommandes());
+		System.out.println(
+				"\n--------------------------------------------------------------------------Liste de courses après l'ajout"
+						+ listeCourses);
 
 		return "client";
+	}
+
+	public String enleverProduit() {
+
+		List<LigneCommande> listeCourses = (List<LigneCommande>) FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("panierActuel");
+
+		System.out.println(
+				"\n--------------------------------------------------------------------------Liste courses avant retrait"
+						+ listeCourses);
+
+		// Vérifier si le produit est dans la liste de commande
+		Iterator<LigneCommande> it = listeCourses.iterator();
+
+		LigneCommande ligne = new LigneCommande();
+
+		System.out.println(
+				"\n--------------------------------------------------------------------------Nouvelle ligne commande pour itérator"
+						+ ligne);
+
+		// Parcours de la liste à la recherche d'une correspondance entre id de
+		// produits
+
+		if (it.hasNext()) { // liste avec éléments
+
+			do {
+				ligne = it.next();
+			} while (it.hasNext() && ligne.getAttProduit().getId_produit() != prod.getId_produit());
+
+		}
+
+		System.out
+				.println("\n--------------------------------------------------------------------------Fin de l'itérator"
+						+ ligne);
+
+		if (ligne.getAttProduit() == null || ligne.getAttProduit().getId_produit() != prod.getId_produit()) {
+
+			// Pas de correspondance --> Produit non selectionné
+
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Un produit doit être selectionné avant de pouvoir le retirer du panier"));
+
+		} else { // Correspondance --> Retrait possible
+
+			if (ligne.getQuantite() == 1) { // 1 unité selectionnée --> Effacer
+											// la ligne du panier
+				listeCourses.remove(ligne);
+
+			} else { // Plusieurs unités selectionnées --> retirer une unité
+
+				ligne.setQuantite(ligne.getQuantite() - 1);
+
+			}
+
+			// Rafraichir la liste dans la session
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("panierActuel", listeCourses);
+
+		}
+		System.out.println(
+				"\n--------------------------------------------------------------------------Liste de courses après le retrait"
+						+ listeCourses);
+
+		return "client";
+
 	}
 
 }
