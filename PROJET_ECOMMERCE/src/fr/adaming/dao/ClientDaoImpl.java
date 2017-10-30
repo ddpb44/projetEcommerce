@@ -1,11 +1,13 @@
 package fr.adaming.dao;
 
+import java.util.List;
+
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import fr.adaming.model.Produit;
+import fr.adaming.model.Client;
 
 @Stateful
 public class ClientDaoImpl implements IClientDao{
@@ -14,19 +16,46 @@ public class ClientDaoImpl implements IClientDao{
 	EntityManager em;
 
 	@Override
-	public Produit getProdById(int id) {
+	public Client saveClient(Client client) {
+		
+		em.persist(client);
+		
+		return client;
+	}
+
+	@Override
+	public List<Client> getAllClients() {
 		// La requête JPQL
-		String req="SELECT prod FROM Produit prod WHERE prod.id_produit=:pProd";
+		String req="SELECT cl FROM Client cl";
 		
 		Query query=em.createQuery(req);
 		
-		// Passage params
-		query.setParameter("pProd", id);
+		// Récupération de la liste de clients
+		List<Client> listeClients=query.getResultList();
 		
-		// Récupération du produit
-		Produit produitOut=(Produit) query.getSingleResult();
-		
-		return produitOut;
+		return listeClients;
 	}
+
+	@Override
+	public Client getClient(Client client) {
+		// La requête JPQL
+		String req="SELECT cl FROM Client cl WHERE cl.nomClient=:pNom AND cl.adresse=:pAdresse AND cl.email=:pEmail AND cl.tel=:pTel";
+		
+		Query query =em.createQuery(req);
+		
+		// Passage des params
+		query.setParameter("pNom", client.getNomClient());
+		query.setParameter("pAdresse", client.getAdresse());
+		query.setParameter("pEmail", client.getEmail());
+		query.setParameter("pTel", client.getTel());
+		
+		// Récupération du client
+		
+		Client clientOut=(Client) query.getSingleResult();
+		
+		return clientOut;
+	}
+
+	
 
 }

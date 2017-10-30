@@ -10,16 +10,16 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
-import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
+import fr.adaming.service.ICommandeService;
+import fr.adaming.service.ILigneCommandeService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "clMB")
@@ -38,6 +38,12 @@ public class ClientManagedBean implements Serializable {
 	@EJB
 	private IClientService clService;
 
+	@EJB
+	private ICommandeService comService;
+
+	@EJB
+	private ILigneCommandeService lComService;
+
 	private Client client;
 
 	private Produit prod;
@@ -48,14 +54,13 @@ public class ClientManagedBean implements Serializable {
 
 	private LigneCommande ligneCommande;
 
-	private Panier panier;
-
 	private List<LigneCommande> listeLCom = new ArrayList<LigneCommande>();
 
 	// Constructeur vide
 	public ClientManagedBean() {
 		this.client = new Client();
 		this.ligneCommande = new LigneCommande();
+		this.commande = new Commande();
 	}
 
 	// Getters/Setters
@@ -89,6 +94,30 @@ public class ClientManagedBean implements Serializable {
 
 	public void setClService(IClientService clService) {
 		this.clService = clService;
+	}
+
+	public ICommandeService getComService() {
+		return comService;
+	}
+
+	public void setComService(ICommandeService comService) {
+		this.comService = comService;
+	}
+
+	public ILigneCommandeService getlComService() {
+		return lComService;
+	}
+
+	public void setlComService(ILigneCommandeService lComService) {
+		this.lComService = lComService;
+	}
+
+	public List<LigneCommande> getListeLCom() {
+		return listeLCom;
+	}
+
+	public void setListeLCom(List<LigneCommande> listeLCom) {
+		this.listeLCom = listeLCom;
 	}
 
 	public int getId_prod() {
@@ -295,6 +324,64 @@ public class ClientManagedBean implements Serializable {
 				"\n--------------------------------------------------------------------------Liste de courses après le retrait"
 						+ listeCourses);
 
+		return "client";
+
+	}
+
+	public String enregistrerCommande() {
+
+		// Récupération de la liste de clients inscrits dans la BD
+		List<Client> listeClients = clService.getAllClients();
+
+		if (listeClients.isEmpty()) { // La liste de clients est vide
+
+			// Ajout du client à la BD
+			clService.saveClient(client);
+
+		} else { // Des clients sont déjà enregistrés
+
+			// Parcours de la liste à la recherche d'une correspondance
+			Iterator<Client> it = listeClients.iterator();
+
+			Client cl = new Client();
+
+			do {
+				it.next();
+			} while (it.hasNext()
+					&& (cl.getNomClient() != client.getNomClient() || cl.getAdresse() != client.getAdresse()
+							|| cl.getEmail() != client.getEmail() || cl.getTel() != client.getTel()));
+
+			if (cl.getNomClient() != client.getNomClient() || cl.getAdresse() != client.getAdresse()
+					|| cl.getEmail() != client.getEmail() || cl.getTel() != client.getTel()) {
+
+				// Pas de correspondance complète --> Ajout du client à la BD
+				clService.saveClient(client);
+
+			}
+
+		}
+
+		// Récupération du client avec ID (après passage dans la BD)
+		Client clientEnregistre = clService.getClient(client);
+
+		// Passage du client et de la date à la commande
+		commande.setAttClient(clientEnregistre);
+		// commande.setDate_commande(date_commande);
+
+		// Enregistrement de la commande dans la base de données
+		Commande comEnregistree = comService.saveCommande(commande);
+
+		// Récupération de la liste de lignes de commandes (panier) à partir de
+		// la session
+		List<LigneCommande> listeCourses = (List<LigneCommande>) FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("panierActuel");
+
+		// Transmission de la commande à toutes les lignes de commandes et
+		// enregistrement de ces lignes dans la BD
+		for (LigneCommande ligne : listeCourses) {
+			ligne.setAttCommande(comEnregistree);
+			lComService.saveLCommande(ligne);
+		}
 		return "client";
 
 	}

@@ -1,10 +1,12 @@
 package fr.adaming.service;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.IClientDao;
-import fr.adaming.model.Produit;
+import fr.adaming.model.Client;
 
 @Stateful
 public class ClientServiceImpl implements IClientService{
@@ -23,10 +25,25 @@ public class ClientServiceImpl implements IClientService{
 
 	// Méthodes
 	@Override
-	public Produit getProdById(int id) {
+	public Client saveClient(Client client) {
 		
-		return clientDao.getProdById(id);
+		return clientDao.saveClient(client);
 	}
+
+	@Override
+	public List<Client> getAllClients() {
+		
+		return clientDao.getAllClients();
+	}
+
+	@Override
+	public Client getClient(Client client) {
+		
+		return clientDao.getClient(client);
+	}
+
+	
+	
 	
 	
 

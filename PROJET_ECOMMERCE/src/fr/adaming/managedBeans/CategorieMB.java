@@ -11,8 +11,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import org.primefaces.model.SelectableDataModel;
-
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
@@ -21,10 +19,8 @@ import fr.adaming.service.IProduitService;
 
 @ManagedBean
 @RequestScoped
-public class CategorieMB implements Serializable {// ,
-													// SelectableDataModel<Categorie>
-													// {
-
+public class CategorieMB implements Serializable {
+	
 	// Association UML --> JAVA
 
 	@EJB
