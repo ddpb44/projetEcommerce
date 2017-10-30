@@ -6,6 +6,10 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+<h:outputStylesheet library="css" name="Style.css" target="head" />
+	<h:outputStylesheet library="css" name="bootstrap.css" target="head" />
+	<link href="https://fonts.googleapis.com/css?family=Cantarell"
+		rel="stylesheet" />
 	<title>Page Accueil</title>
 </h:head>
 <h:body>
@@ -13,7 +17,7 @@
 		<ui:include src="/Template/header.xhtml"></ui:include>
 	</ui:insert>
 	<h:form>
-		<h1 style="color: red;">Formulaire d'ajout de catégorie</h1>
+		<h1 style="color: gold;">Formulaire d'ajout de catégorie</h1>
 		<h:panelGrid columns="2">
 				Nom : <p:inputText value="#{categorieMB.cat.nomCategorie}"
 				styleClass="input" />

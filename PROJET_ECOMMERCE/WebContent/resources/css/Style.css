@@ -2,8 +2,27 @@ body {
 	background-image: url('../resources/images/fond.jpg');
 	background-size: cover;
 	margin: 0;
+	color: gold;
 	
 
+}
+
+.header{
+	background-image: url('../resources/images/header.jpg');
+	height: 80px;	
+	color: gold;
+	font-size: 50px;
+	font-family: 'Cantarell', sans-serif;
+	
+	
+}
+
+.panier{
+	
+	position: absolute;
+	left: 70%;
+	top: 26%;
+	
 }
 
 .marque{
@@ -56,7 +75,7 @@ body {
 
 
 .ui-widget-content{
-	background-color: gold;
+	background-color: #804000;
 	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0.5)));
 	color: black;
 	font-family: 'Cantarell', sans-serif;
@@ -64,8 +83,8 @@ body {
 }
 
 .ui-datatable-odd{
-	background-color: #6F640B ;
-	color: white;
+	background-color: #edb712 ;
+	color: black;
 	font-family: 'Cantarell', sans-serif;
 	
 	

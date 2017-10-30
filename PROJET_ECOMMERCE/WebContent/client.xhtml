@@ -6,22 +6,30 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<h:outputStylesheet library="css" name="Style.css" target="head" />
+	<h:outputStylesheet library="css" name="bootstrap.css" target="head" />
+	<link href="https://fonts.googleapis.com/css?family=Cantarell"
+		rel="stylesheet" />
 	<title>Page Accueil Client</title>
 </h:head>
 <h:body>
+<h:form>
 	<ui:insert name="page">
 		<ui:include src="/Template/header2.xhtml"></ui:include>
 	</ui:insert>
 
-	<h1>LISTE DES PRODUITS</h1>
-	<h:form>
+	<h1 style="color: gold; margin-left: 20%">LISTE DES PRODUITS</h1>
+	<h1 style="color: gold; text-align: right; margin-right: 12%; margin-top: -3%">PANIER</h1>
+
+	
+	<p:growl id="messages" autoUpdate="true" />
 		<p:dataTable id="tableProd" var="prod"
 			value="#{sessionScope.prodListe}" widgetVar="prodTable"
-			multiViewState="true" rows="5" paginator="true"
+			multiViewState="true" rows="8" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15"
 			emptyMessage="Pas de catégories trouvés avec vos critères"
-			style="width:90%; margin-left:5%" filteredValue="#{pMB.filteredProd}">
+			style="width:65%; margin-left:2%" filteredValue="#{pMB.filteredProd}">
 
 
 			<p:column headerText="Designation" filterBy="#{prod.designation}"
@@ -47,7 +55,7 @@
 			<p:column filterBy="#{prod.cat.nomCategorie}" headerText="Catégorie"
 				filterMatchMode="in">
 				<f:facet name="filter">
-					<p:selectCheckboxMenu label="Selectionner une categorie"
+					<p:selectCheckboxMenu label="Selection cat"
 						onchange="PF('prodTable').filter()" panelStyle="width:125px"
 						scrollHeight="150">
 						<f:selectItems value="#{sessionScope.nCatListe}" />
@@ -57,15 +65,37 @@
 			</p:column>
 
 			<p:column headerText="Actions">
-				<p:commandButton value="+" action="#{clMB.ajouterProduit}">
+				<p:commandButton value="+" action="#{clMB.ajouterProduit}" update="@all">
 					<f:setPropertyActionListener value="#{prod}" target="#{clMB.prod}"></f:setPropertyActionListener>
 				</p:commandButton>
-				<p:commandButton value="-" action="#{clMB.enleverProduit}">
+				<p:commandButton value="-" action="#{clMB.enleverProduit}" update="@all">
 					<f:setPropertyActionListener value="#{prod}" target="#{clMB.prod}"></f:setPropertyActionListener>
 				</p:commandButton>
 			</p:column>
-
 		</p:dataTable>
+		
 	</h:form>
+
+
+	<h:form>
+	<div class="panier">
+	<p:dataTable var="p" value="#{sessionScope.panierActuel}"
+		emptyMessage="Panier vide" style="width:90%">
+		<p:column headerText="Designation">
+			<h:outputText value="#{p.attProduit.designation}" />
+		</p:column>
+
+		<p:column headerText="Qte">
+			<h:outputText value="#{p.quantite}" />
+		</p:column>
+
+		<p:column headerText="Prix Unitaire">
+			<h:outputText value="#{p.attProduit.prix}" />
+		</p:column>
+	</p:dataTable>
+	<p:commandLink value="Enregistrer Commande" action="enregistrer.xhtml"/>
+	</div>
+</h:form>
 </h:body>
+
 </html>
