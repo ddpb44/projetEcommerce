@@ -73,37 +73,3 @@ body {
 	margin-top: 10px;
 }
 
-
-.ui-widget-content{
-	background-color: #804000;
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0.5)));
-	color: black;
-	font-family: 'Cantarell', sans-serif;
-	
-}
-
-.ui-datatable-odd{
-	background-color: #edb712 ;
-	color: black;
-	font-family: 'Cantarell', sans-serif;
-	
-	
-	
-}
-
-.ui-widget-header{
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0.5)));
-	background-color: black;
-}
-
-.headimg{
-	
-	height: 150px;
-	background-size: cover;
-	background-image: url('../resources/images/Head.jpg');
-	color: gold;
-	font-family: 'Cantarell', sans-serif;
-	font-size: 50px;
-	padding-top: 80px;
-	
-}
