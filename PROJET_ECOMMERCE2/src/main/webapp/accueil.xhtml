@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="Style.css" target="head" />
+	<h:outputStylesheet library="css" name="bootstrap.css" target="head" />
+	<link href="https://fonts.googleapis.com/css?family=Cantarell"
+		rel="stylesheet" />
+	<title>Page Accueil</title>
+</h:head>
+<h:body>
+	<div class="marque">DDPB Mystery</div>
+
+	<div class="slogan">Votre boutique de sorcellerie</div>
+	<div class="login">
+
+		<h:form>
+
+			<h2>Connexion administrateur</h2>
+Mail:<br />
+			<p:inputText value="#{aMB.admin.mail}" required="true"
+				styleClass="input" />
+			<br />
+Mot de passe:<br />
+			<p:password value="#{aMB.admin.mdp}" required="true"
+				styleClass="input" />
+			<br />
+			<h:commandButton value="Se connecter" action="#{aMB.seconnecter}"
+				styleClass="btn btn-warning" />
+			<p:growl id="messages" autoUpdate="true" />
+			<br />
+		</h:form>
+		<h:form>
+
+			<h2>Accueil client</h2>
+			<h:commandButton value="Entrer dans la boutique"
+				action="#{clMB.entrerSite}" styleClass="btn btn-warning" />
+
+		</h:form>
+	</div>
+</h:body>
+</html>

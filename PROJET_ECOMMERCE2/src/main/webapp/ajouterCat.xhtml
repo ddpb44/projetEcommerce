@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<h:outputStylesheet library="css" name="Style.css" target="head" />
+	<h:outputStylesheet library="css" name="bootstrap.css" target="head" />
+	<link href="https://fonts.googleapis.com/css?family=Cantarell"
+		rel="stylesheet" />
+	<title>Page Accueil</title>
+</h:head>
+<h:body>
+<ui:insert name="page">
+		<ui:include src="/Template/header.xhtml"></ui:include>
+	</ui:insert>
+	<h:form>
+		<h1 style="color: gold;">Formulaire d'ajout de catégorie</h1>
+		<h:panelGrid columns="2">
+				Nom : <p:inputText value="#{categorieMB.cat.nomCategorie}"
+				styleClass="input" />
+			
+				Description :<p:inputText value="#{categorieMB.cat.description}"
+				styleClass="input" />
+
+			<p:commandButton value="Ajouter" id="b1"
+				action="#{categorieMB.ajouterCategorie()}"
+				styleClass="btn btn-warning" />
+
+			<p:growl autoUpdate="true"></p:growl>
+		</h:panelGrid>
+	</h:form>
+
+	</h:body>
+</html>

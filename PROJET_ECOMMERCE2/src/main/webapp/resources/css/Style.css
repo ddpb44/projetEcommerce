@@ -1,0 +1,75 @@
+body {
+	background-image: url('../resources/images/fond.jpg');
+	background-size: cover;
+	margin: 0;
+	color: gold;
+	
+
+}
+
+.header{
+	background-image: url('../resources/images/header.jpg');
+	height: 80px;	
+	color: gold;
+	font-size: 50px;
+	font-family: 'Cantarell', sans-serif;
+	
+	
+}
+
+.panier{
+	
+	position: absolute;
+	left: 70%;
+	top: 26%;
+	
+}
+
+.marque{
+	
+	padding: 20px 0;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size : 80px;
+    color : gold;
+    font-family: 'Cantarell', sans-serif;
+}
+
+.slogan{
+	padding: 2px 0;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size : 40px;
+    color : #723A96;
+    font-family: 'Cantarell', sans-serif;
+}
+
+.login {
+	position:absolute;
+    left: 50%;
+    top: 60%;
+    padding-top: 10px;
+   	text-align: center;
+	font-family: 'Cantarell', sans-serif;
+	font-size: 23px;
+	color: white;
+	width: 500px;
+    height: 400px;
+    margin-left: -250px; /* Cette valeur doit être la moitié négative de la valeur du width */
+    margin-top: -200px;
+}
+
+.input {
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+	padding: 25px;
+	margin-top: 10px;
+}
+

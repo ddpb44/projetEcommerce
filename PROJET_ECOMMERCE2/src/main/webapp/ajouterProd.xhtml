@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<h:outputStylesheet library="css" name="Style.css" target="head" />
+	<h:outputStylesheet library="css" name="bootstrap.css" target="head" />
+	<link href="https://fonts.googleapis.com/css?family=Cantarell"
+		rel="stylesheet" />
+	<title>Ajouter</title>
+</h:head>
+<h:body>
+	<ui:insert name="page">
+		<ui:include src="/Template/header.xhtml"></ui:include>
+	</ui:insert>
+	<h:form>
+		<h1 style="color: gold;">Formulaire d'ajout produit</h1>
+		<h:panelGrid columns="2">
+
+			<p:outputLabel for="c" value="Categorie: " />
+			<p:selectOneMenu id="c" value="#{pMB.nomCat}">
+				<f:selectItem itemLabel="Selectionner une catégorie" itemValue="" />
+				<f:selectItems value="#{sessionScope.nCatListe}" />
+			</p:selectOneMenu>
+					
+				Designation :<p:inputText value="#{pMB.prod.designation}"
+				styleClass="input" />
+				
+				Description :<p:inputTextarea rows="6" cols="33"
+				value="#{pMB.prod.description}" />
+				
+				Prix : <p:inputText value="#{pMB.prod.prix}" styleClass="input" />
+				
+				Quantité : <p:inputText value="#{pMB.prod.quantite}"
+				styleClass="input" />
+
+			<p:commandButton value="Ajouter" id="b1"
+				action="#{pMB.ajouterProduit}" styleClass="btn btn-warning" />
+
+			<p:growl autoUpdate="true"></p:growl>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
