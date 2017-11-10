@@ -3,7 +3,7 @@ body {
 	background-size: cover;
 	margin: 0;
 	color: gold;
-	
+	cursor: url('../resources/images/cursor.gif') 4 4, auto;
 
 }
 
@@ -13,6 +13,7 @@ body {
 	color: gold;
 	font-size: 50px;
 	font-family: 'Cantarell', sans-serif;
+	cursor: url('../resources/images/cursor.gif') 4 4, auto;
 	
 	
 }
@@ -22,6 +23,7 @@ body {
 	position: absolute;
 	left: 70%;
 	top: 26%;
+	cursor: url('../resources/images/cursor.gif') 4 4, auto;
 	
 }
 
@@ -33,6 +35,7 @@ body {
     font-size : 80px;
     color : gold;
     font-family: 'Cantarell', sans-serif;
+    cursor: url('../resources/images/cursor.gif') 4 4, auto;
 }
 
 .slogan{
@@ -42,6 +45,7 @@ body {
     font-size : 40px;
     color : #723A96;
     font-family: 'Cantarell', sans-serif;
+    cursor: url('../resources/images/cursor.gif') 4 4, auto;
 }
 
 .login {
@@ -57,19 +61,21 @@ body {
     height: 400px;
     margin-left: -250px; /* Cette valeur doit être la moitié négative de la valeur du width */
     margin-top: -200px;
+    cursor: url('../resources/images/cursor.gif') 4 4, auto;
 }
 
 .input {
-	width: 250px;
-	height: 30px;
-	background: transparent;
+	width: 280px;
+	height: 45px;
+	background: white;
 	border: 1px solid rgba(255, 255, 255, 0.6);
 	border-radius: 2px;
-	color: #fff;
+	color: black;
 	font-family: 'Exo', sans-serif;
 	font-size: 18px;
 	font-weight: 400;
 	padding: 25px;
 	margin-top: 10px;
+	cursor: url('../resources/images/cursor.gif') 4 4, auto;
 }
 

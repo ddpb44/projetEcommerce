@@ -26,8 +26,7 @@ Mail:<br />
 				styleClass="input" />
 			<br />
 Mot de passe:<br />
-			<p:password value="#{aMB.admin.mdp}" required="true"
-				styleClass="input" />
+			<p:keyboard id="password" value="#{aMB.admin.mdp}" password="true" keypadOnly="true" />
 			<br />
 			<h:commandButton value="Se connecter" action="#{aMB.seconnecter}"
 				styleClass="btn btn-warning" />
