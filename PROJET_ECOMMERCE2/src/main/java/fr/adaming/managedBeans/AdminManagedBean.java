@@ -14,6 +14,8 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IAdminService;
+import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 import sun.print.PSStreamPrintService;
 
 @ManagedBean(name = "aMB") 
@@ -22,6 +24,12 @@ public class AdminManagedBean implements Serializable {
 
 	@ManagedProperty(value = "#{aService}")
 	private IAdminService aService;
+	
+	@ManagedProperty(value = "#{catService}")
+	private ICategorieService catService;
+	
+	@ManagedProperty(value = "#{prodService}")
+	private IProduitService prodService;
 
 	private Admin admin;
 
@@ -46,6 +54,24 @@ public class AdminManagedBean implements Serializable {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
+	
+	
+	public ICategorieService getCatService() {
+		return catService;
+	}
+
+	public void setCatService(ICategorieService catService) {
+		this.catService = catService;
+	}
+	
+	
+	public IProduitService getProdService() {
+		return prodService;
+	}
+
+	public void setProdService(IProduitService prodService) {
+		this.prodService = prodService;
+	}
 
 	// Les méthodes métiers
 	public String seconnecter() {
@@ -54,18 +80,18 @@ public class AdminManagedBean implements Serializable {
 
 		if (a_out != null) {
 
-			// //Recuperation de la liste
-			// List<Categorie> listeCat =cService.getAllCategorie();
-			// List<String> listNCat = cService.getAllCatNames();
-			// List<Produit> listeProd = pService.getAllProduits();
-			//
-			// //Ajouter la liste des categories et produits dans la session
-			// FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe",
-			// listeCat);
-			// FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("nCatListe",
-			// listNCat);
-			// FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prodListe",
-			// listeProd);
+			 //Recuperation de la liste
+			 List<Categorie> listeCat =catService.getAllCategorie();
+			 List<String> listNCat = catService.getAllCatNames();
+			 List<Produit> listeProd = prodService.getAllProduits();
+			
+			 //Ajouter la liste des categories et produits dans la session
+			 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("catListe",
+			 listeCat);
+			 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("nCatListe",
+			 listNCat);
+			 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("prodListe",
+			 listeProd);
 
 			// Ajouter l'admin dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adminSession", a_out);
