@@ -16,7 +16,7 @@ import fr.adaming.model.Produit;
 import fr.adaming.service.IAdminService;
 import sun.print.PSStreamPrintService;
 
-@ManagedBean(name = "aMB")
+@ManagedBean(name = "aMB") 
 @RequestScoped
 public class AdminManagedBean implements Serializable {
 
