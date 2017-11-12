@@ -13,16 +13,17 @@
 	<title>Page Accueil Client</title>
 </h:head>
 <h:body>
-<h:form>
-	<ui:insert name="page">
-		<ui:include src="/Template/header2.xhtml"></ui:include>
-	</ui:insert>
+	<h:form>
+		<ui:insert name="page">
+			<ui:include src="/Template/header2.xhtml"></ui:include>
+		</ui:insert>
 
-	<h1 style="color: gold; margin-left: 20%">LISTE DES PRODUITS</h1>
-	<h1 style="color: gold; text-align: right; margin-right: 12%; margin-top: -3%">PANIER</h1>
+		<h1 style="color: gold; margin-left: 20%">LISTE DES PRODUITS</h1>
+		<h1
+			style="color: gold; text-align: right; margin-right: 12%; margin-top: -3%">PANIER</h1>
 
-	
-	<p:growl id="messages" autoUpdate="true" />
+
+		<p:growl id="messages" autoUpdate="true" />
 		<p:dataTable id="tableProd" var="prod"
 			value="#{sessionScope.prodListe}" widgetVar="prodTable"
 			multiViewState="true" rows="8" paginator="true"
@@ -65,37 +66,42 @@
 			</p:column>
 
 			<p:column headerText="Actions">
-				<p:commandButton value="+" action="#{clMB.ajouterProduit}" update="@all">
+
+				<p:commandButton value="+" action="#{clMB.ajouterProduit}"
+					update="@all">
 					<f:setPropertyActionListener value="#{prod}" target="#{clMB.prod}"></f:setPropertyActionListener>
 				</p:commandButton>
-				<p:commandButton value="-" action="#{clMB.enleverProduit}" update="@all">
+
+				<p:commandButton value="-" action="#{clMB.enleverProduit}"
+					update="@all">
 					<f:setPropertyActionListener value="#{prod}" target="#{clMB.prod}"></f:setPropertyActionListener>
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
-		
+
 	</h:form>
 
 
 	<h:form>
-	<div class="panier">
-	<p:dataTable var="p" value="#{sessionScope.panierActuel}"
-		emptyMessage="Panier vide" style="width:90%">
-		<p:column headerText="Designation">
-			<h:outputText value="#{p.attProduit.designation}" />
-		</p:column>
+		<div class="panier">
+			<p:dataTable var="p" value="#{sessionScope.panierActuel}"
+				emptyMessage="Panier vide" style="width:90%">
+				<p:column headerText="Designation">
+					<h:outputText value="#{p.attProduit.designation}" />
+				</p:column>
 
-		<p:column headerText="Qte">
-			<h:outputText value="#{p.quantite}" />
-		</p:column>
+				<p:column headerText="Qte">
+					<h:outputText value="#{p.quantite}" />
+				</p:column>
 
-		<p:column headerText="Prix Unitaire">
-			<h:outputText value="#{p.attProduit.prix}" />
-		</p:column>
-	</p:dataTable>
-	<p:commandLink value="Enregistrer Commande" action="enregistrer.xhtml"/>
-	</div>
-</h:form>
+				<p:column headerText="Prix Unitaire">
+					<h:outputText value="#{p.attProduit.prix}" />
+				</p:column>
+			</p:dataTable>
+			<p:commandLink value="Enregistrer Commande"
+				action="enregistrer.xhtml" style="color:gold" />
+		</div>
+	</h:form>
 </h:body>
 
 </html>

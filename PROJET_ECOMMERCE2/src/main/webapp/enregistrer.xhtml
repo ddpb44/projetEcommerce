@@ -19,11 +19,7 @@
 		</ui:insert>
 
 		<h1 style="color: gold;">Formulaire d'enregistrement</h1>
-		<h:panelGrid columns="2">
-
-			<p:outputLabel for="dc" value="Date commande:" />
-			<p:calendar id="dc" value="#{clMB.commande.date_commande}"
-				mode="inline" />
+		<h:panelGrid columns="2" style="color:gold">
        			 
 				Nom : <p:inputText value="#{clMB.client.nomClient}" styleClass="input" />
 				
