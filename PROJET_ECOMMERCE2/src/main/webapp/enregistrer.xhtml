@@ -21,19 +21,35 @@
 		<h1 style="color: gold;">Formulaire d'enregistrement</h1>
 		<h:panelGrid columns="2" style="color:gold">
        			 
-				Nom : <p:inputText value="#{clMB.client.nomClient}" styleClass="input" />
+				Nom : <p:inputText value="#{clMB.client.nomClient}"
+				styleClass="input" required="true"/>
 				
-				Adresse : <p:inputText value="#{clMB.client.adresse}" styleClass="input" />
+				Adresse : <p:inputText value="#{clMB.client.adresse}"
+				styleClass="input" required="true"/>
 				
-				Email : <p:inputText value="#{clMB.client.email}"
-				styleClass="input" />
+				Email : <p:inputText value="#{clMB.client.email}" styleClass="input"
+				validatorMessage="Le mail n'est pas valide" required="true">
+				<f:validateRegex pattern=".+[@].+"></f:validateRegex>
+			</p:inputText>
 				
-				Tel : <p:inputText value="#{clMB.client.tel}"
-				styleClass="input" />
-				
+				Tel : <p:inputText value="#{clMB.client.tel}" styleClass="input"
+				validatorMessage="Le numero de telephone indiqué n'est pas correct" required="true">
+				<f:validateLength minimum="10" maximum="10" />
+			</p:inputText>
 
-				<p:commandButton value="Enregistrer" id="b1"
-				action="#{clMB.enregistrerCommande}" styleClass="btn btn-warning" />
+			<p:commandButton value="Enregistrer" id="b1"
+				action="#{clMB.enregistrerCommande}" styleClass="btn btn-warning">
+				<p:confirm header="Confirmation"
+					message="Voulez vous bien soummettre votre commande"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Oui" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Non" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 
 			<p:growl autoUpdate="true"></p:growl>
 		</h:panelGrid>

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "lignes_de_commande")
@@ -22,6 +23,9 @@ public class LigneCommande implements Serializable {
 	private int quantite;
 
 	private double prix;
+	
+	@Transient
+	private double prix2;
 
 	// Associations UML --> JAVA
 	@ManyToOne
@@ -76,6 +80,14 @@ public class LigneCommande implements Serializable {
 
 	public void setAttCommande(Commande attCommande) {
 		this.attCommande = attCommande;
+	}
+
+	public double getPrix2() {
+		return prix2;
+	}
+
+	public void setPrix2(double prix2) {
+		this.prix2 = prix2;
 	}
 
 	// Méthode toString()

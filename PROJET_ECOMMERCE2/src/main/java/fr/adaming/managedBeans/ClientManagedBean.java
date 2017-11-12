@@ -234,6 +234,7 @@ public class ClientManagedBean implements Serializable {
 				ligneCommande.setAttProduit(prod);
 				ligneCommande.setPrix(prod.getPrix());
 				ligneCommande.setQuantite(ligneCommande.getQuantite() + 1);
+				ligneCommande.setPrix2(ligneCommande.getPrix()*ligneCommande.getQuantite());
 
 				// Ajouter la ligne de commande à la liste
 				listeCourses.add(this.ligneCommande);
@@ -254,6 +255,7 @@ public class ClientManagedBean implements Serializable {
 
 				// Mettre à jour la ligne de commande
 				ligne.setQuantite(ligne.getQuantite() + 1);
+				ligne.setPrix2(ligne.getPrix()*ligne.getQuantite());
 
 				// Rafraichir la liste dans la session
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("panierActuel",

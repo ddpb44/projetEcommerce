@@ -23,7 +23,9 @@
 			<h2>Connexion administrateur</h2>
 Mail:<br />
 			<p:inputText value="#{aMB.admin.mail}" required="true"
-				styleClass="input" />
+				styleClass="input" validatorMessage="Le mail n'est pas valide">
+				<f:validateRegex pattern=".+[@].+"></f:validateRegex>
+			</p:inputText>	
 			<br />
 Mot de passe:<br />
 			<p:keyboard id="password" value="#{aMB.admin.mdp}" password="true" keypadOnly="true" />
